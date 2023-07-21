@@ -1,0 +1,58 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "Node.js & TypeScript",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		8081
+	],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	//"postCreateCommand": "npm i",
+	"postStartCommand": "npm run start:dev",
+	// Configure tool-specific properties.
+	// "customizations": {},
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "root",
+	"mounts": [
+		"source=${localEnv:USERPROFILE},target=/home/vscode,type=bind,consistency=cached",
+		// "source=${localEnv:USERPROFILE}/.pnpm-store,target=/root/.local/share/pnpm/store,type=bind,consistency=cached",
+		"source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"alefragnani.Bookmarks",
+				"adamhartford.vscode-base64",
+				"bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+				"christian-kohler.npm-intellisense",
+				"christian-kohler.path-intellisense",
+				"dbaeumer.vscode-eslint",
+				"humao.rest-client",
+				"eamodio.gitlens",
+				"flesler.url-encode",
+				"folke.vscode-monorepo-workspace",
+				"GitHub.vscode-pull-request-github",
+				"IronGeek.vscode-env",
+				"janisdd.vscode-edit-csv",
+				"mechatroner.rainbow-csv",
+				"mintlify.document",
+				"mitchdenny.ecdc",
+				"mushan.vscode-paste-image",
+				"ms-vsliveshare.vsliveshare",
+				"nextfaze.json-parse-stringify",
+				"quicktype.quicktype",
+				"redhat.vscode-xml",
+				"ryanluker.vscode-coverage-gutters",
+				"vscode-icons-team.vscode-icons",
+				"vstirbu.vscode-mermaid-preview",
+				"wayou.vscode-todo-highlight",
+				"yoavbls.pretty-ts-errors",
+				"zhuangtongfa.material-theme"
+			]
+		}
+	}
+}

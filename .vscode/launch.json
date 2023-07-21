@@ -14,7 +14,7 @@
             "runtimeArgs": [
                 "--nolazy",
                 "-r",
-                "ts-node/register",
+                "ts-node/register"
             ],
             "sourceMaps": true,
             "envFile": "${workspaceFolder}/.env",
@@ -44,6 +44,13 @@
                 "group": "Jest",
                 "order": 2
             }
+        },
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node"
         }
     ]
 }
