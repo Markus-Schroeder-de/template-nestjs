@@ -11,7 +11,7 @@
 		8081
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	//"postCreateCommand": "npm i",
+	"postCreateCommand": "chmod +x .devcontainer/postCreateCommands.sh && .devcontainer/postCreateCommands.sh",
 	"postStartCommand": "npm run start:dev",
 	// Configure tool-specific properties.
 	// "customizations": {},

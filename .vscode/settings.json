@@ -6,5 +6,6 @@
         "source.organizeImports": false
     },
     "coverage-gutters.showLineCoverage": true,
-    "coverage-gutters.showGutterCoverage": false
+    "coverage-gutters.showGutterCoverage": false,
+    "docwriter.style": "JSDoc"
 }
