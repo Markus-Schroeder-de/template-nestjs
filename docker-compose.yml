@@ -1,8 +1,34 @@
 version: '3.4'
 
 services:
-  api:
-    image: api
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command: >-
+      --log.level=DEBUG
+      --api.insecure=true
+      --providers.docker=true
+      --providers.docker.exposedbydefault=false
+      --entrypoints.web.address=:80
+      --entrypoints.websecure.address=:443
+      --entrypoints.web.http.redirections.entryPoint.to=websecure
+      --entrypoints.web.http.redirections.entryPoint.scheme=https
+      --entrypoints.web.http.redirections.entrypoint.permanent=true
+      --certificatesresolvers.myresolver.acme.tlschallenge=true
+      --certificatesresolvers.myresolver.acme.email=admin@aa-0.de
+      --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
+      --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+    ports:
+      - "80:80"
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  backend:
+    image: backend
+    container_name: backend
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -10,3 +36,8 @@ services:
       NODE_ENV: production
     ports:
       - 8081:8081
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.backend.rule=Host(`vm-02.aa-0.de`)
+      - traefik.http.routers.backend.entrypoints=websecure
+      - traefik.http.routers.backend.tls.certresolver=myresolver
