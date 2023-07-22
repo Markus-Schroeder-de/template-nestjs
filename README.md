@@ -1,3 +1,37 @@
+# Description
+
+NestJS-template
+
+## Development
+for local development in devcontainer on port 8081
+
+## Running in Prod
+dockerimages:
+ * traefik: reverse-proxy mit SSL/HTTPS-Support
+ * backend: Container with NestJS-App
+ * dbs: Container with db
+ * frontend: Vue-Frontend
+
+```bash
+# Install
+$ git clone https://github.com/Markus-Schroeder-de/template-nestjs.git .
+
+# run
+$ cd template-nestjs/
+$ docker compose up -d traefik backend
+
+# stop
+$ docker compose down
+
+# show running containers
+$ docker ps
+
+# bash in container
+$ docker exec -it backend /bin/sh
+```
+
+# NestJs
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
